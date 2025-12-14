@@ -20,25 +20,34 @@ public class Account implements AccountService {
 
     @Override
     public void deposit(int amount) {
-        if(amount <= 0){
-            throw new IllegalArgumentException("Deposit amount must be positive");
+        try {
+            if(amount <= 0){
+                throw new IllegalArgumentException("Deposit amount must be positive");
+            }
+            balance += amount;
+            Transaction transaction = new Transaction(currentDate, amount, balance);
+            transactions.add(transaction);
+        }catch (IllegalArgumentException e){
+            System.out.println("Deposit failed: " + e.getMessage());
         }
-        balance += amount;
-        Transaction transaction = new Transaction(currentDate, amount, balance);
-        transactions.add(transaction);
+
     }
 
     @Override
     public void withdraw(int amount) {
-        if(amount <= 0){
-            throw new IllegalArgumentException("Withdrawal amount must be positive");
+        try {
+            if(amount <= 0){
+                throw new IllegalArgumentException("Withdrawal amount must be positive");
+            }
+            if(amount > balance){
+                throw new IllegalArgumentException("Insufficient balance");
+            }
+            balance -= amount;
+            Transaction transaction = new Transaction(currentDate, -amount, balance);
+            transactions.add(transaction);
+        }catch (IllegalArgumentException e){
+            System.out.println("Withdrawal failed: " + e.getMessage());
         }
-        if(amount > balance){
-            throw new IllegalArgumentException("Insufficient balance");
-        }
-        balance -= amount;
-        Transaction transaction = new Transaction(currentDate, -amount, balance);
-        transactions.add(transaction);
     }
 
     @Override

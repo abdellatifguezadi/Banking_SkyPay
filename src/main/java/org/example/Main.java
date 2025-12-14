@@ -23,16 +23,10 @@ public class Main {
 
 
         System.out.println("--- Testing Exception ---");
-        try{
-            account.deposit(-100);
-        }catch (IllegalArgumentException e){
-            System.out.println("Caught expected exception: " + e.getMessage());
-        }
 
-        try{
+            account.deposit(-100);
+
             account.withdraw(10000);
-        }catch (IllegalArgumentException e) {
-            System.out.println("Caught expected exception: " + e.getMessage());
-        }
+
     }
 }
