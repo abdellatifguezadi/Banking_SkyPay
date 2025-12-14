@@ -43,11 +43,11 @@ public class Account implements AccountService {
 
     @Override
     public void printStatement() {
-        System.out.println("Date        || Amount  || Balance");
+        System.out.println("Date       || Amount  || Balance");
         ArrayList<Transaction> reversedTransactions = new ArrayList<>(transactions);
         Collections.reverse(reversedTransactions);
         for (Transaction transaction : reversedTransactions) {
-            System.out.printf("%s || %d     || %d%n",
+            System.out.printf("%s || %d    || %d%n",
                     transaction.date().format(formatter),
                     transaction.amount(),
                     transaction.balance());
